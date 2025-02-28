@@ -40,7 +40,7 @@ $(TABLE): $(CLEANED) $(TOP_WORDS)
 
 # Cleanup
 clean:
-	rm -f $(CLEANED) $(TOKENS) $(FREQS) $(TOP_WORDS) $(TABLE)
+	rm -f $(CLEANED) $(TOKENS) $(FREQS) $(TOP_WORDS) $(TABLE) $(STOPPED)
 
 
 step1:
