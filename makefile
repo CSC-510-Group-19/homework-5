@@ -25,7 +25,7 @@ $(STOPPED) : $(CLEANED)
 
 # Step 3: Report frequency of words
 $(FREQS): $(STOPPED)
-	cat $< | YYY | sort -nr > $@
+	cat $< | tr ' ' '\n' | grep -v '^$$' | sort | uniq -c | awk '{print $$1, $$2}' | sort -nr > $@
 
 
 # Step 4: Extract Top 10 most frequent words
@@ -50,10 +50,13 @@ step1:
 step2:
 	$(MAKE) clean $(STOPPED); head $(STOPPED)
 
-
 step3:
-	$(MAKE) clean $(TOP_WORDS); head $(TOP_WORDS)
+	$(MAKE) clean $(FREQS); head $(FREQS)
 
 
 step4:
+	$(MAKE) clean $(TOP_WORDS); head $(TOP_WORDS)
+
+
+step5:
 	$(MAKE) clean $(TABLE); head $(TABLE) # | column -s, -t
